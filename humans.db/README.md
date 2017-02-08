@@ -53,8 +53,9 @@ A CSV file with the following fields:
 - Full name
 - Bachelor
 
-Some `sed` magic in Census files (published openly by Unizar) should
-give this file easily.
+Some `sed` magic in Census files (published openly by Unizar, like [this](
+http://eina.unizar.es/archivos/2016_2017/Elecciones/ESTJdE/Censo_Definitivo_JdE_Estudiantes_EINA.pdf))
+should give this file easily.
 
 ## subject
 
@@ -62,6 +63,6 @@ A file with 2 fields separated by `:`:
 - Subject number
 - Subject name
 
-Some web scrapping of the Bachelors' pages (like
-http://titulaciones.unizar.es/estudios-arquitectura/cuadro_asignaturas.html)
+Some web scrapping of the Bachelors' pages (like [this](
+http://titulaciones.unizar.es/estudios-arquitectura/cuadro_asignaturas.html))
 will give you this.
