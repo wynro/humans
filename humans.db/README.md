@@ -1,6 +1,6 @@
 # Humans.db
 
-A database that you **could** extract from multiple sources
+A database that you *could* extract from multiple sources
 (hypothetically)
 
 # Sources
