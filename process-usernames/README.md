@@ -14,7 +14,7 @@ How to get that file is your work. You could ask nicely to all of your
 friends, so you can have all their nips. Or you could use something
 like:
 
-	getent passwd | cut -d: -f 1,5 | sed 's/a\([0-9]\{6\}\):\(.*\)/\1 = \2/' > humans
+	getent passwd | cut -d: -f 1,5 | sed -e 's/a\([0-9]\{6\}\):\(.*\)/\1 = \2/' -e 's/\([^:]*\):\(.*\)/\1 = \2/' > humans
 
 in certain server (its name rimes with POSIX). Relax, it's not fast.
 
