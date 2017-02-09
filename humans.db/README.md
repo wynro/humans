@@ -53,7 +53,8 @@ A CSV file with the following fields:
 - Full name
 - Bachelor
 
-Some `sed` magic in Census files (published openly by Unizar, like [this](
+Some `pdfgrep | sed` magic in Census files (published openly by Unizar,
+like [this](
 http://eina.unizar.es/archivos/2016_2017/Elecciones/ESTJdE/Censo_Definitivo_JdE_Estudiantes_EINA.pdf))
 should give this file easily.
 
