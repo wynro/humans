@@ -1,0 +1,28 @@
+.TH HUMANS "1" "June 2017" "" "User Commands"
+.SH NAME
+humans-load \- Creates the humans.db database from the sources/ files
+.SH SYNOPSIS
+.B humans-load
+.SH DESCRIPTION
+
+.PP
+Creates the humans.db. This scripts requires to execute \fBhumans-get-sources(1)\fR before. The database must be then copied to the correct directory \fB/usr/share/humans/humans.db\FR.
+
+.SS "Exit status:"
+.TP
+0
+if OK
+.TP
+1-255
+if there where problems
+.SH FILES
+.TP
+\fI/tmp/sources/*\fR
+Files required to generate the database
+.TP
+\fIhumans.db\fR
+Database generated
+.SH AUTHOR
+Written by Guillermo Robles
+.SH "REPORTING BUGS"
+Report all bugs to guillerobles1995@gmail.com

@@ -1,0 +1,25 @@
+.TH HUMANS "1" "June 2017" "" "User Commands"
+.SH NAME
+humans-get-sources \- Download and format the source files for humans.db
+.SH SYNOPSIS
+.B humans-get-sources
+.SH DESCRIPTION
+
+.PP
+Downloads all the necessary information files and formats them, leaving the formated files in \fB/tmp/sources\fR. This command must be executed before \fBhumans-load\fR.
+
+.SS "Exit status:"
+.TP
+0
+if OK
+.TP
+1-255
+if there where problems
+.SH FILES
+.TP
+\fI/tmp/sources/*\fR
+Files with all the necessary information to construct humans.db
+.SH AUTHOR
+Written by Guillermo Robles
+.SH "REPORTING BUGS"
+Report all bugs to guillerobles1995@gmail.com

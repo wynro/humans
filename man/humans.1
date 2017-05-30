@@ -2,7 +2,7 @@
 .SH NAME
 humans \- Consult the humans.db database
 .SH SYNOPSIS
-.B humans \fR[-h] \fR[-v] \fOoperation\fR \fOargument\fR
+.B humans \fR[-h] \fR[-v] \fIoperation\fR \fIargument\fR
 .SH DESCRIPTION
 
 .PP
@@ -46,17 +46,16 @@ Executes the given query over the database, the database is an SQLite3.
 0
 if OK
 .TP
-1
+1-255
 if minor problems (e.g., the database file is inaccessible).
 .SH FILES
 .TP
-\FC/usr/share/humans/humans.db\F[] 
+\fI/usr/share/humans/humans.db\fR
 This file consist in the database that will be queried.
 .TP
-\FC/usr/share/humans/schema.sql\F[]
+\fI/usr/share/humans/schema.sql\fR
 .RS 7 
 Schema of the previous database.
-.\" By now, sections CANNOT be recursive
 .SH AUTHOR
 Written by Guillermo Robles
 .SH "REPORTING BUGS"
