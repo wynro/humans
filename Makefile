@@ -21,11 +21,11 @@ clean:
 distclean: clean
 
 uninstall:
-	-rm -f "$(DESTDIR)/bin/humans"
-	-rm -f "$(DESTDIR)/bin/humans-load"
-	-rm -f "$(DESTDIR)/bin/humans-get-sources"
+	-rm -f "${DESTDIR}/bin/humans"
+	-rm -f "${DESTDIR}/bin/humans-load"
+	-rm -f "${DESTDIR}/bin/humans-get-sources"
 	-rm -f "${DESTDIR}/bin/humans-process-usernames"
-	-rm -f "$(DESTDIR)/share/humans/schema.sql"
-	-rm -f "$(DESTDIR)/share/humans/humans.db"
+	-rm -f "${DESTDIR}/share/humans/schema.sql"
+	-rm -f "${DESTDIR}/share/humans/humans.db"
 
 .PHONY: all install clean distclean uninstall

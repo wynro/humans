@@ -1,0 +1,14 @@
+Source: humans
+Section: utils
+Priority: optional
+Maintainer: Guillermo Robles <guillerobles1995@gmail.com>
+Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.6
+#Homepage: <insert the upstream URL, if relevant>
+#Vcs-Git: git://anonscm.debian.org/collab-maint/hello-sh.git
+#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/hello-sh.git
+
+Package: humans
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, pdfgrep, sqlite3
+Description: Collects and consults a database of eina's students
