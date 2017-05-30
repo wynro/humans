@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/2.0/
+Upstream-Name: humans
+Upstream-Contact: Guillermo Robles <guillerobles1995@gmail.com>
+Source: https://github.com/wynro/humans
+
+Files: *
+Copyright: 2016-2017 Guillermo Robles
+License: GPL-3+
