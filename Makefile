@@ -17,6 +17,16 @@ install:
 	install -D humans_completion \
 		"${DESTDIR}/usr/share/bash-completion/completions/humans"
 
+install-doc:
+	cp man/humans.1 \
+		"${DESTDIR}/usr/share/man/man1/humans.1"
+	cp man/humans-load.1 \
+		"${DESTDIR}/usr/share/man/man1/humans-load.1"
+	cp man/humans-get-sources.1 \
+		"${DESTDIR}/usr/share/man/man1/humans-get-sources.1"
+	cp man/humans-process-usernames.1 \
+		"${DESTDIR}/usr/share/man/man1/humans-process-usernames.1"
+
 clean:
 
 distclean: clean
@@ -28,6 +38,12 @@ uninstall:
 	-rm -f "${DESTDIR}/usr/bin/humans-process-usernames"
 	-rm -f "${DESTDIR}/usr/share/humans"
 	-rm -f "${DESTDIR}/usr/share/bash-completion/completions/humans"
+
+uninstall-doc:
+	-rm -f "${DESTDIR}/usr/share/man/man1/humans.1"
+	-rm -f "${DESTDIR}/usr/share/man/man1/humans-load.1"
+	-rm -f "${DESTDIR}/usr/share/man/man1/humans-get-sources.1"
+	-rm -f "${DESTDIR}/usr/share/man/man1/humans-process-usernames.1"
 
 package:
 	gbp buildpackage -us -uc
