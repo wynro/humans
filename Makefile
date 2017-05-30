@@ -27,7 +27,7 @@ uninstall:
 	-rm -f "${DESTDIR}/usr/bin/humans-get-sources"
 	-rm -f "${DESTDIR}/usr/bin/humans-process-usernames"
 	-rm -f "${DESTDIR}/usr/share/humans"
-	-rm -f "${DESTDIR}/etc/bash_completion.d/humans"
+	-rm -f "${DESTDIR}/usr/share/bash-completion/completions/humans"
 
 package:
 	gbp buildpackage -us -uc
