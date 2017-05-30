@@ -17,5 +17,9 @@ fi
 while read line; do
     username=$(echo "$line" | sed 's/.*\([0-9]\{6\}\).*/\1/')
     realname=$(sqlite3 "${DB_LOCATION}" "SELECT name FROM STUDENT WHERE nip='${username}'")
-    echo "$line ($realname)"
+    if [ "$realname" == "" ]; then
+        echo "$line"
+    else
+        echo "$line ($realname)"
+    fi
 done < "$FILE"
