@@ -1,3 +1,11 @@
+humans (0.2) stable; urgency=high
+
+  * Add manpages
+  * Improve package
+  * Improve commands
+
+ -- Guillermo Robles <guillerobles1995@gmail.com>  Tue, 30 May 2017 19:13:47 +0200
+
 humans (0.1) stable; urgency=medium
 
   * Initial release.
