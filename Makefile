@@ -11,10 +11,9 @@ install:
 		"${DESTDIR}/usr/bin/humans-get-sources"
 	install -D humans-process-usernames \
 		"${DESTDIR}/usr/bin/humans-process-usernames"
-	install -D schema.sql \
-		"${DESTDIR}/usr/share/humans/schema.sql"
-	install -D humans.db \
-		"${DESTDIR}/usr/share/humans/humans.db"
+	mkdir -p "${DESTDIR}/usr/share/humans/"
+	cp schema.sql "${DESTDIR}/usr/share/humans/schema.sql"
+	cp humans.db "${DESTDIR}/usr/share/humans/humans.db"
 
 clean:
 
