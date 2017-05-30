@@ -1,32 +1,32 @@
-export DESTDIR=/usr
+export DESTDIR=/
 
 all:
 
 install:
 	install -D humans \
-		"${DESTDIR}/bin/humans"
+		"${DESTDIR}/usr/bin/humans"
 	install -D humans-load \
-		"${DESTDIR}/bin/humans-load"
+		"${DESTDIR}/usr/bin/humans-load"
 	install -D humans-get-sources \
-		"${DESTDIR}/bin/humans-get-sources"
+		"${DESTDIR}/usr/bin/humans-get-sources"
 	install -D humans-process-usernames \
-		"${DESTDIR}/bin/humans-process-usernames"
+		"${DESTDIR}/usr/bin/humans-process-usernames"
 	install -D schema.sql \
-		"${DESTDIR}/share/humans/schema.sql"
+		"${DESTDIR}/usr/share/humans/schema.sql"
 	install -D humans.db \
-		"${DESTDIR}/share/humans/humans.db"
+		"${DESTDIR}/usr/share/humans/humans.db"
 
 clean:
 
 distclean: clean
 
 uninstall:
-	-rm -f "${DESTDIR}/bin/humans"
-	-rm -f "${DESTDIR}/bin/humans-load"
-	-rm -f "${DESTDIR}/bin/humans-get-sources"
-	-rm -f "${DESTDIR}/bin/humans-process-usernames"
-	-rm -f "${DESTDIR}/share/humans/schema.sql"
-	-rm -f "${DESTDIR}/share/humans/humans.db"
+	-rm -f "${DESTDIR}/usr/bin/humans"
+	-rm -f "${DESTDIR}/usr/bin/humans-load"
+	-rm -f "${DESTDIR}/usr/bin/humans-get-sources"
+	-rm -f "${DESTDIR}/usr/bin/humans-process-usernames"
+	-rm -f "${DESTDIR}/usr/share/humans/schema.sql"
+	-rm -f "${DESTDIR}/usr/share/humans/humans.db"
 
 package:
 	gbp buildpackage -us -uc
