@@ -24,8 +24,7 @@ uninstall:
 	-rm -f "${DESTDIR}/usr/bin/humans-load"
 	-rm -f "${DESTDIR}/usr/bin/humans-get-sources"
 	-rm -f "${DESTDIR}/usr/bin/humans-process-usernames"
-	-rm -f "${DESTDIR}/usr/share/humans/schema.sql"
-	-rm -f "${DESTDIR}/usr/share/humans/humans.db"
+	-rm -f "${DESTDIR}/usr/share/humans"
 
 package:
 	gbp buildpackage -us -uc
