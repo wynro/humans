@@ -43,7 +43,6 @@ _humans () {
             ;;
         "subject")
             local subjects=$(sqlite3 "${DB_LOCATION}" "SELECT name FROM SUBJECT" | tr "A-Z" "a-z")
-            # echo ${subjects}
             COMPREPLY=( $(compgen -W "${subjects}" -- "${cur}") )
             return 0
             ;;
