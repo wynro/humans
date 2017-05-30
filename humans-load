@@ -70,7 +70,7 @@ census_reader = csv.reader(census, delimiter=',', quotechar='"')
 for i in census_reader:
     dni = i[0].strip()
     name = remove_tildes(i[1].strip())
-    bachelor = i[2].strip()
+    bachelor = remove_tildes(i[2].strip())
     census_dict[name.upper()] = {"dni": dni, "bachelor": bachelor}
     bachelor_array.append(bachelor)
 
