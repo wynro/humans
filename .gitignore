@@ -1,3 +1,5 @@
-.u
-humans.db/sources/
-process-usernames/humans
+debian/debhelper-build-stamp
+debian/files
+debian/humans.debhelper.log
+debian/humans.substvars
+debian/humans/**/*
