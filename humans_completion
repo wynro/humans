@@ -1,0 +1,87 @@
+#!/bin/bash
+# Author: Guillermo Robles
+#
+# Gives completion to the humans suite
+
+
+_humans () {
+    local cur prev
+
+    DB_LOCATION="/usr/share/humans/humans.db"
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts='nip name dni subject bachelor all query'
+    short_opts='nip name dni all'
+    case "${prev}" in
+        "humans")
+            COMPREPLY=( $(compgen -W "${opts} -s -h" -- "${cur}") )
+            return 0
+            ;;
+        "-s")
+            COMPREPLY=( $(compgen -W "${short_opts}" -- "${cur}") )
+            return 0
+            ;;            
+        "-h")
+            COMPREPLY=()
+            return 0
+            ;;
+        "nip")
+            local nips=$(sqlite3 "${DB_LOCATION}" "SELECT nip FROM STUDENT")
+            COMPREPLY=( $(compgen -W "${nips}" -- "${cur}") )
+            return 0
+            ;;
+        "name")
+            local names=$(sqlite3 "${DB_LOCATION}" "SELECT name FROM STUDENT")
+            COMPREPLY=( $(compgen -W "${names}" -- "${cur}") )
+            return 0
+            ;;
+        "dni")
+            local nips=$(sqlite3 "${DB_LOCATION}" "SELECT dni FROM STUDENT")
+            COMPREPLY=( $(compgen -W "${nips}" -- "${cur}") )
+            return 0
+            ;;
+        "subject")
+            local subjects=$(sqlite3 "${DB_LOCATION}" "SELECT name FROM SUBJECT" | tr "A-Z" "a-z")
+            # echo ${subjects}
+            COMPREPLY=( $(compgen -W "${subjects}" -- "${cur}") )
+            return 0
+            ;;
+        "bachelor")
+            local bachelors=$(sqlite3 "${DB_LOCATION}" "SELECT name FROM BACHELOR" | tr "A-Z" "a-z")
+            COMPREPLY=( $(compgen -W "${bachelors}" -- "${cur}") )
+            return 0
+            ;;
+        "all")
+            COMPREPLY=()
+            return 0
+            ;;
+        "query")
+            COMPREPLY=()
+            return 0
+            ;;
+    esac
+}
+
+
+_humans-load () {
+    COMPREPLY=()
+    return 0
+}
+
+_humans-get-sources () {
+    COMPREPLY=()
+    return 0
+}
+
+_humans-process-usernames () {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    
+    COMPREPLY=( $(compgen -o filenames -A file -- "${cur}") )
+    return 0
+}
+
+complete -F _humans humans
+complete -F _humans-load humans-load
+complete -F _humans-get-sources humans-get-sources
+complete -F _humans-process-usernames humans-process-usernames
