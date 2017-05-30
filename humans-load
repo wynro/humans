@@ -7,6 +7,7 @@
 import csv
 import re
 import sqlite3
+import locale
 
 
 def remove_tildes(string):
@@ -23,7 +24,8 @@ def remove_tildes(string):
                  .replace('Í', 'I')\
                  .replace('Ó', 'O')\
                  .replace('Ú', 'U')\
-                 .replace('Ñ', 'N')
+                 .replace('Ñ', 'N')\
+                 .replace('‐', '-')
 
 
 def generate_name_permutations(name):
@@ -52,7 +54,7 @@ subject = open('/tmp/humans/sources/subject', 'rb')
 subject_dict = {}
 for i in subject.readlines():
     code = i.split(':')[0]
-    name = remove_tildes(i).split(':')[1].replace('\n', '')
+    name = locale.normalize(remove_tildes(i).split(':')[1].replace('\n', ''))
     subject_dict[code] = name
     try:
         c.execute("INSERT INTO SUBJECT (code,name) VALUES ('{}','{}');"
@@ -69,8 +71,8 @@ bachelor_dict = {}
 census_reader = csv.reader(census, delimiter=',', quotechar='"')
 for i in census_reader:
     dni = i[0].strip()
-    name = remove_tildes(i[1].strip())
-    bachelor = remove_tildes(i[2].strip())
+    name = locale.normalize(remove_tildes(i[1].strip()))
+    bachelor = locale.normalize(remove_tildes(i[2].strip()))
     census_dict[name.upper()] = {"dni": dni, "bachelor": bachelor}
     bachelor_array.append(bachelor)
 
