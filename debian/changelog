@@ -1,3 +1,12 @@
+humans (0.3) stable; urgency=high
+
+  * Add bash autocompletion
+  * Rewrote the README
+  * Fix dependencies
+  * Bunch of bugfixes
+
+ -- Guillermo Robles <guillerobles1995@gmail.com>  Wed, 31 May 2017 00:29:32 +0200
+
 humans (0.2) stable; urgency=high
 
   * Add manpages
