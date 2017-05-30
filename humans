@@ -93,7 +93,7 @@ case "$COMMAND" in
         fi
         sqlite3 -separator "|" -list -header \
                 "$DB_LOCATION" \
-                "SELECT * FROM ALL_INFO WHERE dni LIKE '%${ARG}%'" |
+                "SELECT * FROM ALL_INFO WHERE bachelor LIKE '%${ARG}%'" |
             column -t -n -s "|"
         ;;
     "all")
