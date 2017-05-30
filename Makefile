@@ -28,4 +28,7 @@ uninstall:
 	-rm -f "${DESTDIR}/share/humans/schema.sql"
 	-rm -f "${DESTDIR}/share/humans/humans.db"
 
-.PHONY: all install clean distclean uninstall
+package:
+	gbp buildpackage -us -uc
+
+.PHONY: all install clean distclean uninstall package
