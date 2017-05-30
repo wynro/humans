@@ -1,0 +1,63 @@
+.TH HUMANS "1" "June 2017" "" "User Commands"
+.SH NAME
+humans \- Consult the humans.db database
+.SH SYNOPSIS
+.B humans \fR[-h] \fR[-v] \fOoperation\fR \fOargument\fR
+.SH DESCRIPTION
+
+.PP
+Allows the easy query of the humans.db database. A empty database is included in the package, but the full database must be downloaded previously with \fBhumans-get-sources(1)\fR and \fBhumans-load(1)\fR, and moved to the correct place (See \fBFILES\fR section).
+
+The supported flags are:
+.TP
+\fB-s\fR
+Prints the short answer, it constraints the query to the fields nip, dni and name. Is only applicable to the operations \fBnip\fR, \fBname\fR and \fBdni\fR.
+.TP
+\fB-h\fR
+Prints usage.
+
+.PP
+The valid operations (and its arguments) are:
+
+.TP
+\fBnip NIP\fR
+Queries the database, retorning the information for the person with the given nip. It must be an exact match (no partial nips).
+.TP
+\fBname NAME\fR
+Queries the database retorning the information for the person(s) with the given name. It supports partial searching (It will give all the information even if only a partial substring is given)
+.TP
+\fBdni DNI\fR
+Queries the database retorning the information for the person with the given dni. It must be an exact match (no partial dnis).
+.TP
+\fBsubject SUBJECT\fR
+Queries the database retorning the information for the person(s) with the given subjects. It supports partial searching (It will give all the information even if only a substring is given)
+.TP
+\fBbachelor BACHELOR\fR
+Queries the database retorning the information for the person(s) with the given bachelor. It supports partial searching (It will give all the information even if only a substring is given)
+.TP
+\fBall\fR
+Returns the full information of the database.
+.TP
+\fBquery QUERY\fR
+Executes the given query over the database, the database is an SQLite3.
+
+.SS "Exit status:"
+.TP
+0
+if OK
+.TP
+1
+if minor problems (e.g., the database file is inaccessible).
+.SH FILES
+.TP
+\FC/usr/share/humans/humans.db\F[] 
+This file consist in the database that will be queried.
+.TP
+\FC/usr/share/humans/schema.sql\F[]
+.RS 7 
+Schema of the previous database.
+.\" By now, sections CANNOT be recursive
+.SH AUTHOR
+Written by Guillermo Robles
+.SH "REPORTING BUGS"
+Report all bugs to guillerobles1995@gmail.com

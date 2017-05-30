@@ -14,6 +14,7 @@ install:
 	mkdir -p "${DESTDIR}/usr/share/humans/"
 	cp schema.sql "${DESTDIR}/usr/share/humans/schema.sql"
 	cp humans.db "${DESTDIR}/usr/share/humans/humans.db"
+	install -D --mode=644 humans.1 "${DESTDIR}/usr/local/man/man1/humans.1"
 
 clean:
 
@@ -26,6 +27,7 @@ uninstall:
 	-rm -f "${DESTDIR}/usr/bin/humans-process-usernames"
 	-rm -f "${DESTDIR}/usr/share/humans/schema.sql"
 	-rm -f "${DESTDIR}/usr/share/humans/humans.db"
+	-rm -f "${DESTDIR}/usr/local/man/man1/humans.1"
 
 package:
 	gbp buildpackage -us -uc
