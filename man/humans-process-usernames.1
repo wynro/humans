@@ -1,0 +1,25 @@
+.TH HUMANS "1" "June 2017" "" "User Commands"
+.SH NAME
+humans-process-usernames \- Adds names to nip-identified documents
+.SH SYNOPSIS
+.B humans \fIfile\fR
+.SH DESCRIPTION
+
+.PP
+Adds the name to any line that includes a nip, either in the given file or in the standard input, if no file is given
+
+.SS "Exit status:"
+.TP
+0
+if OK
+.TP
+1-255
+if minor problems (e.g., the database file is inaccessible).
+.SH FILES
+.TP
+\fI/usr/share/humans/humans.db\fR
+Necessary to substitute nips (See \fBhumans(1)\fR, \fBhumans-get-sources(1)\fR and \fBhumans-load(1)\fR, )
+.SH AUTHOR
+Written by Guillermo Robles
+.SH "REPORTING BUGS"
+Report all bugs to guillerobles1995@gmail.com
