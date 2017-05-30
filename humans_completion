@@ -12,7 +12,7 @@ _humans () {
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
     opts='nip name dni subject bachelor all query'
-    short_opts='nip name dni all'
+    short_opts='nip name dni bachelor all'
     case "${prev}" in
         "humans")
             COMPREPLY=( $(compgen -W "${opts} -s -h" -- "${cur}") )

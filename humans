@@ -87,13 +87,13 @@ case "$COMMAND" in
             column -t -n -s "|"
         ;;
     "bachelor")
+        QUERY="SELECT * FROM ALL_INFO WHERE bachelor LIKE '%${ARG}%'"
         if [ "$SHORT_MODE" ]; then
-            echo "No short mode in bachelor search"
-            exit 1
+            QUERY="SELECT DISTINCT nip,dni,name,bachelor FROM ALL_INFO WHERE bachelor LIKE '%${ARG}%'"
         fi
         sqlite3 -separator "|" -list -header \
                 "$DB_LOCATION" \
-                "SELECT * FROM ALL_INFO WHERE bachelor LIKE '%${ARG}%'" |
+                "${QUERY}" |
             column -t -n -s "|"
         ;;
     "all")
