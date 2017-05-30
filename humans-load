@@ -37,6 +37,7 @@ def generate_name_permutations(name):
             ' '.join(a[-3:]+a[:-3])]
 
 
+print("Starting insertions...")
 # Load DB connection
 conn = sqlite3.connect('humans.db')
 c = conn.cursor()
@@ -150,3 +151,5 @@ conn.commit()
 # The end
 c.close()
 conn.close()
+
+print("Done. You should copy the generated humans.db to its final location (In a standard installation, /usr/share/humans/humans.db)")

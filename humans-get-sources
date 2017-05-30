@@ -33,7 +33,7 @@ if [ "${acceptance}" == "Y" ] || [ "${acceptance}" == "y" ]; then
     rm /tmp/census.pdf
     # TODO: Support more bachelors
     curl -s http://titulaciones.unizar.es/ing-informatica/cuadro_asignaturas.html | iconv -f ISO-8859-15 -t UTF-8 | grep -a "^<tr><[^>]*><[^>]*><[^>]*>" | grep -v '\*\*' | sed "s/<tr><[^>]*><[^>]*><[^>]*>\([0-9]\{1,5\}\)<[^>]*><[^>]*><[^>]*><[^>]*><[^>]*><[^>]*>\([^<]*\)<[^>]*>.*/\1:\2/" > /tmp/humans/sources/subject
-    echo "Done. You should copy the generated humans.db to its final location (In a standard installation, /usr/share/humans/humans.db)"
+    echo "Done."
 else
     echo "Bye then!"
     exit 1
