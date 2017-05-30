@@ -1,0 +1,115 @@
+#!/bin/bash
+# Author: Guillermo Robles
+#
+# Script that simplifies basic queries to humans.db
+
+DB_LOCATION='/usr/share/humans/humans.db'
+if [ ! -f "${DB_LOCATION}" ]; then
+    DB_LOCATION='./humans.db'
+fi
+
+SCRIPT=`basename ${BASH_SOURCE[0]}`
+
+
+usage () {
+    echo "Usage:"
+    echo ""
+    echo "      ${SCRIPT} [-h] [-s] <operation> <argument>"
+    echo ""
+}
+
+unset SHORT_MODE
+
+while getopts "sh" FLAG; do
+    case $FLAG in
+        s)
+            SHORT_MODE="True"
+            ;;
+        h|\?)
+            usage
+            exit 0
+            ;;
+    esac
+done
+
+# Shift the arguments to their new positions
+shift $(($OPTIND - 1))
+
+# Get operation and argument (if applicable)
+COMMAND="$1"
+ARG="$2"
+
+if [ "${COMMAND}" == "" ] || ( [ "${COMMAND}" != "all" ] && [ "${ARG}" == "" ] ); then
+    usage
+    exit 1
+fi
+
+
+case "$COMMAND" in
+    "nip")
+        TABLE="ALL_INFO"
+        if [ "$SHORT_MODE" ]; then
+            TABLE="STUDENT"
+        fi
+        sqlite3 -separator "|" -list -header \
+                "$DB_LOCATION" \
+                "SELECT * FROM ${TABLE} WHERE nip = '${ARG}'" |
+            column -t -n -s "|"
+        ;;
+    "name")
+        TABLE="ALL_INFO"
+        if [ "$SHORT_MODE" ]; then
+            TABLE="STUDENT"
+        fi
+        sqlite3 -separator "|" -list -header \
+                "$DB_LOCATION" \
+                "SELECT * FROM ${TABLE} WHERE name LIKE '%${ARG}%'" |
+            column -t -n -s "|"
+        ;;
+    "dni")
+        TABLE="ALL_INFO"
+        if [ "$SHORT_MODE" ]; then
+            TABLE="STUDENT"
+        fi
+        sqlite3 -separator "|" -list -header \
+                "$DB_LOCATION" \
+                "SELECT * FROM ${TABLE} WHERE dni LIKE '%${ARG}%'" |
+            column -t -n -s "|"
+        ;;
+    "subject")
+        if [ "$SHORT_MODE" ]; then
+            echo "No short mode in subject search"
+            exit 1
+        fi
+        sqlite3 -separator "|" -list -header \
+                "$DB_LOCATION" \
+                "SELECT * FROM ALL_INFO WHERE subject LIKE '%${ARG}%'" |
+            column -t -n -s "|"
+        ;;
+    "bachelor")
+        if [ "$SHORT_MODE" ]; then
+            echo "No short mode in bachelor search"
+            exit 1
+        fi
+        sqlite3 -separator "|" -list -header \
+                "$DB_LOCATION" \
+                "SELECT * FROM ALL_INFO WHERE dni LIKE '%${ARG}%'" |
+            column -t -n -s "|"
+        ;;
+    "all")
+        TABLE="ALL_INFO"
+        if [ "$SHORT_MODE" ]; then
+            TABLE="STUDENT"
+        fi
+        sqlite3 -separator "|" -list -header \
+                "$DB_LOCATION" \
+                "SELECT * FROM ${TABLE}" |
+            column -t -n -s "|"
+        ;;
+    "query")
+        sqlite3 -separator "|" -list -header \
+                "$DB_LOCATION" \
+                "${ARG}" |
+            column -t -n -s "|"
+        ;;
+esac

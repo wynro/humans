@@ -1,0 +1,41 @@
+#!/bin/bash
+# Author: Guillermo Robles
+#
+# Extract the sources/ files from their respective places
+
+echo ""
+echo "=========================NOTICE========================="
+echo ""
+echo "I'm actually not sure if the operation you are going"
+echo "to do is illegal. In any case, is morally questionable."
+echo "You accept any responsibilities about the information you are"
+echo "going to get, and is your responsibility to protect the "
+echo "privacy of the persons whose information you possess."
+echo ""
+echo "You will be asked your password multiple times during the process."
+echo "I recommend you to setup Public Key Authentication to make this"
+echo "process faster and easier."
+echo ""
+echo -n "Do you accept those terms [y/N]: "
+read acceptance
+
+if [ "${acceptance}" == "Y" ] || [ "${acceptance}" == "y" ]; then
+    echo -n "Please, input your NIP (just the numbers): "
+    read NIP
+    echo "Starting... (It may take some time)"
+    mkdir -p /tmp/humans/sources/
+    ssh "a${NIP}@central.cps.unizar.es" "getent group" > /tmp/humans/sources/group
+    ssh "a${NIP}@central.cps.unizar.es" "getent passwd" > /tmp/humans/sources/passwd
+    curl -s http://eina.unizar.es/archivos/2016_2017/Elecciones/ESTJdE/Censo_Definitivo_JdE_Estudiantes_EINA.pdf -o /tmp/census.pdf
+    pdfgrep 'M[0-9]{1,2}' /tmp/census.pdf |
+        grep -v 'CIDONCHA' |
+        sed -e 's/ \+/ /g' -e 's/^ \+//' -e 's/^[0-9]\{1,4\} //' -e 's/\(^[0-9A-Za-z]\+\) \(.*\),\(.*\) M[0-9]\{1,2\} \(.*\)/\1|\3,\2|\4/' -e 's/,/ /' -e 's/|/,/g' -e 's/ *, */,/g' -e 's/ / /g' > /tmp/humans/sources/student.csv
+    rm /tmp/census.pdf
+    # TODO: Support more bachelors
+    curl -s http://titulaciones.unizar.es/ing-informatica/cuadro_asignaturas.html | iconv -f ISO-8859-15 -t UTF-8 | grep -a "^<tr><[^>]*><[^>]*><[^>]*>" | grep -v '\*\*' | sed "s/<tr><[^>]*><[^>]*><[^>]*>\([0-9]\{1,5\}\)<[^>]*><[^>]*><[^>]*><[^>]*><[^>]*><[^>]*>\([^<]*\)<[^>]*>.*/\1:\2/" > /tmp/humans/sources/subject
+    echo "Done."
+else
+    echo "Bye then!"
+    exit 1
+fi
+

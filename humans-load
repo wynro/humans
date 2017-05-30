@@ -17,11 +17,13 @@ def remove_tildes(string):
                  .replace('í', 'i')\
                  .replace('ó', 'o')\
                  .replace('ú', 'u')\
+                 .replace('ñ', 'n')\
                  .replace('Á', 'A')\
                  .replace('É', 'E')\
                  .replace('Í', 'I')\
                  .replace('Ó', 'O')\
-                 .replace('Ú', 'U')
+                 .replace('Ú', 'U')\
+                 .replace('Ñ', 'N')
 
 
 def generate_name_permutations(name):
@@ -40,30 +42,33 @@ conn = sqlite3.connect('humans.db')
 c = conn.cursor()
 
 # Load Schema
-schema = open('schema.sql', 'r').read()
+schema = open('/usr/share/humans/schema.sql', 'r').read()
 c.executescript(schema)
 conn.commit()
 
 # Load subjects
-subject = open('sources/subject', 'rb')
+subject = open('/tmp/humans/sources/subject', 'rb')
 subject_dict = {}
 for i in subject.readlines():
     code = i.split(':')[0]
     name = remove_tildes(i).split(':')[1].replace('\n', '')
     subject_dict[code] = name
-    c.execute("INSERT INTO SUBJECT (code,name) VALUES ('{}','{}');"
-              .format(code, name))
+    try:
+        c.execute("INSERT INTO SUBJECT (code,name) VALUES ('{}','{}');"
+                  .format(code, name))
+    except Exception:
+        pass
 conn.commit()
 
 # Load census info
-census = open('sources/student.csv', 'rb')
+census = open('/tmp/humans/sources/student.csv', 'rb')
 census_dict = {}
 bachelor_array = []
 bachelor_dict = {}
 census_reader = csv.reader(census, delimiter=',', quotechar='"')
 for i in census_reader:
     dni = i[0].strip()
-    name = i[1].strip()
+    name = remove_tildes(i[1].strip())
     bachelor = i[2].strip()
     census_dict[name.upper()] = {"dni": dni, "bachelor": bachelor}
     bachelor_array.append(bachelor)
@@ -81,7 +86,7 @@ for i in list(set(bachelor_array)):
 conn.commit()
 
 # Load student NIPs
-hendrix = open('sources/passwd', 'rb')
+hendrix = open('/tmp/humans/sources/passwd', 'rb')
 hendrix_dict = {}
 hendrix_reader = csv.reader(hendrix, delimiter=':', quotechar='"')
 for i in hendrix_reader:
@@ -127,7 +132,7 @@ for i in students_dict:
 conn.commit()
 
 # Load enrollments
-enrollment = open('sources/group', 'rb')
+enrollment = open('/tmp/humans/sources/group', 'rb')
 enrollment_dict = {}
 for i in enrollment.readlines():
     code = i.split(':')[0].replace('g', '')

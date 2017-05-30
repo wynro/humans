@@ -1,0 +1,25 @@
+#!/bin/bash
+# Author: Guillermo Robles
+#
+# Convert nips from the given file or the standard input
+
+DB_LOCATION='/usr/share/humans/humans.db'
+if [ ! -f "${DB_LOCATION}" ]; then
+    DB_LOCATION='./humans.db'
+fi
+
+if [[ "$1" = "" ]]; then
+    FILE=/dev/stdin
+else
+    FILE="$1"
+fi
+
+while read line; do
+    username=$(echo "$line" | sed 's/.*\([0-9]\{6\}\).*/\1/')
+    if [ "$username" = "$line" ]; then
+        echo "$line"
+    else
+        realname=$(sqlite3 "${DB_LOCATION}" "SELECT name FROM STUDENT WHERE nip='${username}'")
+        echo "$line ($realname)"
+    fi
+done < "$FILE"
