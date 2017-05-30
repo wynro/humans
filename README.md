@@ -1,109 +1,66 @@
-# EINA Privacy Violations
+# humans.db
 
-Some (in my opinion) privacy violations allowed by Unizar.
+This collection of tools allows you to create a little database with some information "offered" by EINA.
 
-# Humans.db
+# Installation
 
-A database that you *could* extract from multiple sources
-(hypothetically)
+## From source
+You can do a manual installation with:
 
-## Sources
+```bash
+git clone https://github.com/wynro/humans.git
+cd humans
+sudo make install
+sudo make install-doc # Optional, but gives documentation (man)
+```
 
-All the places from which you can extract interesting information
+And a removal with:
 
-You need a directory called `sources`, with all the described files in
-the given format
+```bash
+git clone https://github.com/wynro/humans.git
+cd humans
+sudo make uninstall
+sudo make install-doc # Optional, if you installed documentation
+```
 
-We need at least 4 sources to fully complete the database:
-- group: Relationship between nips and subjects
-- passwd: Relationship between names and nips
-- subject: Relationship between subject numbers and names
-- students.csv: Relationship between DNIs, names and bachelors
+## From packages
+Go to the releases list (https://github.com/wynro/humans/releases), and download the desired package. You can easily install the package with:
 
-Most can easily be obtained with Linux tools (like pdfgrep, getent,
-sed...)
+```bash
+sudo dpkg -i humans_.*_all.deb
+```
 
-### group
+And uninstall it with:
 
-A file with the same structure of an standard `/etc/group/` UNIX file
+```bash
+sudo dpkg -r humans
+```
 
-It's conformed of the following fields, separated by `:`:
-- group name
-- `*`: I actually don't know what this is
-- group number
-- usernames in the group, separated by commas
+# Basic usage
 
-`getent group` in certain places.
+**This is a basic guide, the man pages are guaranteed to be more up-to-date, so I recommend to refer to them for detailed/extended/current information**
 
-### passwd
+After the installation (Section **Installation**) of the program, you have to create the database (an example one comes with the package, but it is empty and only includes the schema).
 
-A file with the same structure of a standard `/etc/passwd` UNIX file
+First, you need to download the information from the sources and save it in local plain text files, for that, execute:
 
-It's conformed of the following fields, separated by `:`:
-- username
-- `x`: I actually don't know what this is
-- user id
-- user primary group
-- full name
-- home directory
-- preferred shell
+```bash
+humans-get-sources
+```
 
-`getent passwd` in certain places.
+That will create a bunch of files in */tmp/humans*. Those files contain the information in plain text, but we need to compile them into a structured database, to simplify doing queries to the information. For that, just do:
 
-### students.csv
+```bash
+humans-load
+```
 
-A CSV file with the following fields:
-- DNI
-- Full name
-- Bachelor
+<!-- As always, permission problems -->
+This will create a `humans.db` file in your current directory. Move it to its correct location with:
 
-Some `pdfgrep | sed` magic in Census files (published openly by Unizar,
-like [this](
-http://eina.unizar.es/archivos/2016_2017/Elecciones/ESTJdE/Censo_Definitivo_JdE_Estudiantes_EINA.pdf))
-should give this file easily.
+```bash
+sudo mv humans.db /usr/share/humans/humans.db
+```
 
-### subject
+And now you are ready to explore the database with the command `humans`. It includes a beautifully made manual (in `man humans`) and Tab-completion, so feel free to explore all its possibilities.
 
-A file with 2 fields separated by `:`:
-- Subject number
-- Subject name
-
-Some web scrapping of the Bachelors' pages (like [this](
-http://titulaciones.unizar.es/estudios-arquitectura/cuadro_asignaturas.html))
-will give you this.
-
-## process-usernames
-
-This simple script will help with nip identification.
-
-It need a files in this directory (called `humans`), with the
-following structure:
-
-    <nip1> = <name1>
-    <nip2> = <name2>
-    <nip3> = <name3>
-	...
-
-How to get that file is your work. You could ask nicely to all of your
-friends, so you can have all their nips. Or you could use something
-like:
-
-	getent passwd | cut -d: -f 1,5 | sed -e 's/a\([0-9]\{6\}\):\(.*\)/\1 = \2/' -e 's/\([^:]*\):\(.*\)/\1 = \2/' > humans
-
-in certain server (its name rimes with POSIX). Relax, it's not fast.
-
-
-After that, the instruction are simple. Just get the information you
-want to identificate in plaintext (For PDFs, you have the tool
-`pdfgrep`, something like `pdfgrep '^.*$' <file> > plain.txt` will
-give you the PDF in plaintext format).
-
-Once you have the plaintext, simply do
-
-	cat plain.txt | ./process-usernames.sh
-
-or
-
-	./process-usernames.sh plain.txt
-
-To get the text with the enhancements
+**Have fun!**
