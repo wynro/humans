@@ -15,10 +15,27 @@ if OK
 .TP
 1-255
 if minor problems (e.g., the database file is inaccessible).
+
+.SH EXAMPLES
+.TP
+If your information is in a textual file (called file.txt), you can do something like
+
+cat file.txt | humans-process-usernames
+
+.TP
+or
+
+humans-process-usernames file.txt
+
+.TP
+If you have the information in a pdf file, you can use \fBpdfgrep(1)\fR to extract it first (althouh you will lose any formatting you have). Assuming your information is in the file.pdf file:
+
+pdfgrep '.*' file.pdf | humans-process-usernames
+
 .SH FILES
 .TP
 \fI/usr/share/humans/humans.db\fR
-Necessary to substitute nips (See \fBhumans(1)\fR, \fBhumans-get-sources(1)\fR and \fBhumans-load(1)\fR, )
+Necessary to substitute nips (See \fBhumans(1)\fR, \fBhumans-get-sources(1)\fR and \fBhumans-load(1)\fR)
 .SH AUTHOR
 Written by Guillermo Robles
 .SH REPORTING BUGS
