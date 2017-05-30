@@ -22,18 +22,26 @@ The valid operations (and its arguments) are:
 .TP
 \fBnip NIP\fR
 Queries the database, retorning the information for the person with the given nip. It must be an exact match (no partial nips).
+
+In short mode, it only gives the fields nip, dni and name.
 .TP
 \fBname NAME\fR
 Queries the database retorning the information for the person(s) with the given name. It supports partial searching (It will give all the information even if only a partial substring is given)
+
+In short mode, it only gives the fields nip, dni and name.
 .TP
 \fBdni DNI\fR
 Queries the database retorning the information for the person with the given dni. It must be an exact match (no partial dnis).
+
+In short mode, it only gives the fields nip, dni and name.
 .TP
 \fBsubject SUBJECT\fR
 Queries the database retorning the information for the person(s) with the given subjects. It supports partial searching (It will give all the information even if only a substring is given)
 .TP
 \fBbachelor BACHELOR\fR
 Queries the database retorning the information for the person(s) with the given bachelor. It supports partial searching (It will give all the information even if only a substring is given)
+
+In short mode, it only gives the fields nip, dni, name and bachelor.
 .TP
 \fBall\fR
 Returns the full information of the database.
