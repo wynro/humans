@@ -21,7 +21,7 @@ _humans () {
         "-s")
             COMPREPLY=( $(compgen -W "${short_opts}" -- "${cur}") )
             return 0
-            ;;            
+            ;;
         "-h")
             COMPREPLY=()
             return 0
