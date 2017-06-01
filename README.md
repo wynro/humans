@@ -50,7 +50,7 @@ sudo apt-get update
 sudo apt-get install -y coreutils python pdfgrep sqlite3 curl openssh-client sed grep bsdmainutils libc-bin
 ```
 
-To install the missing dependencies.
+To install the missing dependencies. Make sure that the correct versions are being installed (Look in the file `debian/control`, line `Depends:` to see the required versions)
 
 Remember to also remove any unnecessary package on uninstall.
 
