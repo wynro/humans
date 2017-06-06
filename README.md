@@ -58,6 +58,8 @@ Remember to also remove any unnecessary package on uninstall.
 
 **This is a basic guide, the man pages are guaranteed to be more up-to-date, so I recommend to refer to them for detailed/extended/current information**
 
+## Build the database
+### Standard build
 After the installation (Section **Installation**) of the program, you have to create the database (an example one comes with the package, but it is empty and only includes the schema).
 
 First, you need to download the information from the sources and save it in local plain text files, for that, execute:
@@ -79,6 +81,33 @@ This will create a `humans.db` file in your current directory. Move it to its co
 sudo mv humans.db /usr/share/humans/humans.db
 ```
 
-And now you are ready to explore the database with the command `humans`. It includes a beautifully made manual (in `man humans`) and Tab-completion, so feel free to explore all its possibilities.
+### Building with Docker
+
+humans also supports using docker to create the database. To do so, clone the repository
+
+```bash
+git clone https://github.com/wynro/humans.git
+```
+
+Then, build the image
+
+```bash
+cd humans
+docker build . --tag humans
+```
+
+Finally, execute it with
+
+```bash
+docker run -it -v /tmp:/result humans
+```
+
+With this configuration, the database will be left at */tmp*, remember to move it to its correct location.
+
+You can also change the final location of the database changing the ''/tmp'' part in the docker command (Check permissions)
+
+## Usage
+
+The basic command is `humans`. It includes a beautifully made manual (in `man humans`) and Tab-completion, so feel free to explore all its possibilities by yourself.
 
 **Have fun!**
