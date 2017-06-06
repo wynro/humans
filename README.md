@@ -106,6 +106,12 @@ With this configuration, the database will be left at */tmp*, remember to move i
 
 You can also change the final location of the database changing the ''/tmp'' part in the docker command (Check permissions)
 
+After that, you can delete the created image to save space with
+
+```bash
+docker rmi humans
+```
+
 ## Usage
 
 The basic command is `humans`. It includes a beautifully made manual (in `man humans`) and Tab-completion, so feel free to explore all its possibilities by yourself.
