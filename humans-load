@@ -8,6 +8,7 @@ import csv
 import re
 import sqlite3
 import locale
+import os.path
 
 
 def remove_tildes(string):
@@ -45,9 +46,17 @@ conn = sqlite3.connect('humans.db')
 c = conn.cursor()
 
 # Load Schema
-schema = open('/usr/share/humans/schema.sql', 'r').read()
-c.executescript(schema)
-conn.commit()
+
+if os.path.isfile('./schema.sql'):
+    schema = open('./schema.sql', 'r').read()
+    c.executescript(schema)
+    conn.commit()
+elif os.path.isfile('/usr/share/humans/schema.sql'):
+    schema = open('/usr/share/humans/schema.sql', 'r').read()
+    c.executescript(schema)
+    conn.commit()
+else:
+    print("schema file required")
 
 # Load subjects
 subject = open('/tmp/humans/sources/subject', 'rb')
