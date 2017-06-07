@@ -48,4 +48,7 @@ uninstall-doc:
 package:
 	gbp buildpackage -us -uc
 
+package-uncommited:
+	gbp buildpackage -us -uc --git-ignore-new
+
 .PHONY: all install clean distclean uninstall package
