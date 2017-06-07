@@ -99,16 +99,17 @@ docker build . --tag humans
 Finally, execute it with
 
 ```bash
-docker run -it -v /tmp:/result humans
+docker run --name humans -it -v /tmp:/result humans
 ```
 
 With this configuration, the database will be left at */tmp*, remember to move it to its correct location.
 
 You can also change the final location of the database changing the ''/tmp'' part in the docker command (Check permissions)
 
-After that, you can delete the created image to save space with
+After that, you can delete the created container and image to save space with
 
 ```bash
+docker rm humans
 docker rmi humans
 ```
 
