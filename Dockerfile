@@ -23,7 +23,10 @@ RUN apt-get update && \
 
 COPY schema.sql schema.sql
 COPY humans-get-sources humans-get-sources
+RUN chmod +x humans-get-sources
 COPY humans-load humans-load
+RUN chmod +x humans-load
 COPY docker-script.sh docker-script.sh
+RUN chmod +x docker-script.sh
 
 CMD ["./docker-script.sh"]
