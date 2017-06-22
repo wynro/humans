@@ -56,4 +56,4 @@ test:
 	checkbashisms -f humans-get-sources
 	checkbashisms -f humans-process-usernames
 
-.PHONY: all install clean distclean uninstall package test
+.PHONY: all install clean distclean uninstall package package-uncommited test
