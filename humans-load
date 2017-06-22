@@ -59,7 +59,7 @@ else:
     print("schema file required")
 
 # Load subjects
-subject = open('/tmp/humans/sources/subject', 'rb')
+subject = open('/tmp/humans/subject', 'rb')
 subject_dict = {}
 for i in subject.readlines():
     code = i.split(':')[0]
@@ -73,7 +73,7 @@ for i in subject.readlines():
 conn.commit()
 
 # Load census info
-census = open('/tmp/humans/sources/student.csv', 'rb')
+census = open('/tmp/humans/student.csv', 'rb')
 census_dict = {}
 bachelor_array = []
 bachelor_dict = {}
@@ -98,7 +98,7 @@ for i in list(set(bachelor_array)):
 conn.commit()
 
 # Load student NIPs
-hendrix = open('/tmp/humans/sources/passwd', 'rb')
+hendrix = open('/tmp/humans/passwd', 'rb')
 hendrix_dict = {}
 hendrix_reader = csv.reader(hendrix, delimiter=':', quotechar='"')
 for i in hendrix_reader:
@@ -144,7 +144,7 @@ for i in students_dict:
 conn.commit()
 
 # Load enrollments
-enrollment = open('/tmp/humans/sources/group', 'rb')
+enrollment = open('/tmp/humans/group', 'rb')
 enrollment_dict = {}
 for i in enrollment.readlines():
     code = i.split(':')[0].replace('g', '')

@@ -1,6 +1,6 @@
 .TH HUMANS-LOAD "1" "June 2017" "" "User Commands"
 .SH NAME
-humans-load \- Creates the humans.db database from the sources/ files
+humans-load \- Creates the humans.db database from the downloaded source files
 .SH SYNOPSIS
 .B humans-load
 .SH DESCRIPTION
@@ -18,10 +18,10 @@ if there where problems
 .SH FILES
 .TP
 \fI/tmp/humans/*\fR
-Files required to generate the database
+Files required to generate the database. Created after executing \fBhumans-get-sources(1)\fR.
 .TP
 \fIhumans.db\fR
-Database generated
+Database generated. Must be manually moved to its final location (tipically \fI/usr/share/humans/humans.db\fR).
 .SH AUTHOR
 Written by Guillermo Robles
 .SH REPORTING BUGS
