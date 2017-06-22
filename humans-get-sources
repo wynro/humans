@@ -19,7 +19,7 @@ echo ""
 echo -n "Do you accept those terms [y/N]: "
 read acceptance
 
-if [ "${acceptance}" == "Y" ] || [ "${acceptance}" == "y" ]; then
+if [ "${acceptance}" = "Y" ] || [ "${acceptance}" = "y" ]; then
     echo -n "Please, input your NIP (just the numbers): "
     read NIP
     echo "Starting... (It may take some time)"

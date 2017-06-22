@@ -8,7 +8,7 @@ if [ ! -f "${DB_LOCATION}" ]; then
     DB_LOCATION='./humans.db'
 fi
 
-SCRIPT=`basename ${BASH_SOURCE[0]}`
+SCRIPT=`basename ${0}`
 
 
 usage () {
@@ -39,7 +39,7 @@ shift $(($OPTIND - 1))
 COMMAND="$1"
 ARG="$2"
 
-if [ "${COMMAND}" == "" ] || ( [ "${COMMAND}" != "all" ] && [ "${ARG}" == "" ] ); then
+if [ "${COMMAND}" = "" ] || ( [ "${COMMAND}" != "all" ] && [ "${ARG}" = "" ] ); then
     usage
     exit 1
 fi

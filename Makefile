@@ -51,4 +51,9 @@ package:
 package-uncommited:
 	gbp buildpackage -us -uc --git-ignore-new
 
-.PHONY: all install clean distclean uninstall package
+test:
+	checkbashisms -f humans
+	checkbashisms -f humans-get-sources
+	checkbashisms -f humans-process-usernames
+
+.PHONY: all install clean distclean uninstall package test

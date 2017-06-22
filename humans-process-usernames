@@ -8,7 +8,7 @@ if [ ! -f "${DB_LOCATION}" ]; then
     DB_LOCATION='./humans.db'
 fi
 
-if [[ "$1" = "" ]]; then
+if [ "$1" = "" ]; then
     FILE=/dev/stdin
 else
     FILE="$1"
@@ -23,7 +23,7 @@ fi
 process_line () {
     username=$(echo "$1" | sed 's/.*\([0-9]\{6\}\).*/\1/')
     realname=$(sqlite3 "${DB_LOCATION}" "SELECT name FROM STUDENT WHERE nip='${username}'")
-    if [ "$realname" == "" ]; then
+    if [ "$realname" = "" ]; then
         echo "$1"
     else
         echo "$1 ($realname)"
