@@ -24,8 +24,8 @@ if [ "${acceptance}" = "Y" ] || [ "${acceptance}" = "y" ]; then
     read NIP
     echo "Starting... (It may take some time)"
     mkdir -p /tmp/humans/
-    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "a${NIP}@central.cps.unizar.es" "getent group" > /tmp/humans/group
-    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "a${NIP}@central.cps.unizar.es" "getent passwd" > /tmp/humans/passwd
+    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o LogLevel=QUIET "a${NIP}@central.cps.unizar.es" "getent group" > /tmp/humans/group
+    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o LogLevel=QUIET "a${NIP}@central.cps.unizar.es" "getent passwd" > /tmp/humans/passwd
     curl -s http://eina.unizar.es/archivos/2016_2017/Elecciones/ESTJdE/Censo_Definitivo_JdE_Estudiantes_EINA.pdf -o /tmp/census.pdf
     pdfgrep '.*M[0-9]{1,2}.*' /tmp/census.pdf |
         grep -v 'CIDONCHA' |
