@@ -9,7 +9,7 @@ Vcs-Git: https://github.com/wynro/humans.git
 
 Package: humans
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, coreutils (>= 8.0), python, pdfgrep (>= 1.4), sqlite3, curl, openssh-client, sed (>=4.2), grep (>= 2.0), bsdmainutils, libc-bin (>= 2.24)
+Depends: ${shlibs:Depends}, ${misc:Depends}, coreutils (>= 8.0), python, pdfgrep (>= 1.4), sqlite3, curl, openssh-client, sed (>=4.2), grep (>= 2.0), bsdmainutils, libc-bin (>= 2.24), file
 Description: Collects and consults a database of eina's students
  This package allows the easy collection of info from the students of
  Unizar. It also allows one to create a database out of that info, and

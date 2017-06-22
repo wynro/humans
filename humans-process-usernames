@@ -12,14 +12,33 @@ if [[ "$1" = "" ]]; then
     FILE=/dev/stdin
 else
     FILE="$1"
+    if file "${FILE}" | grep -q "PDF document"; then
+        # The passed file is a pdf
+        PDF_FILE="True"
+        echo "${FILE}"
+    fi
 fi
 
-while read line; do
-    username=$(echo "$line" | sed 's/.*\([0-9]\{6\}\).*/\1/')
+# $1 - Line to process
+process_line () {
+    username=$(echo "$1" | sed 's/.*\([0-9]\{6\}\).*/\1/')
     realname=$(sqlite3 "${DB_LOCATION}" "SELECT name FROM STUDENT WHERE nip='${username}'")
     if [ "$realname" == "" ]; then
-        echo "$line"
+        echo "$1"
     else
-        echo "$line ($realname)"
+        echo "$1 ($realname)"
     fi
-done < "$FILE"
+}
+
+if [ ! -z "${PDF_FILE+x}" ]; then
+    # Process as PDF
+    pdfgrep '^.*' "${FILE}" |
+        while read line; do
+            process_line "${line}"
+        done
+else
+    cat "${FILE}" |
+        while read line; do
+            process_line "${line}"
+        done
+fi

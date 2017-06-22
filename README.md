@@ -43,11 +43,11 @@ In both cases, remember to install/uninstall the required dependencies (Subsecti
 ## Dependencies
 Either if you install from sources o from package, you need to install all the required dependencies manually. Neither `dpkg` nor `make` install the dependencies.
 
-The current dependencies are`coreutils, python, pdfgrep, sqlite3, curl, openssh-client, sed, grep, bsdmainutils and libc-bin`. You should have most of those installed in any typical Debian/Ubuntu installation. In case you miss some of them, simply do:
+The current dependencies are`coreutils, python, pdfgrep, sqlite3, curl, openssh-client, sed, grep, bsdmainutils, libc-bin and file`. You should have most of those installed in any typical Debian/Ubuntu installation. In case you miss some of them, simply do:
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y coreutils python pdfgrep sqlite3 curl openssh-client sed grep bsdmainutils libc-bin
+sudo apt-get install -y coreutils python pdfgrep sqlite3 curl openssh-client sed grep bsdmainutils libc-bin file
 ```
 
 To install the missing dependencies. Make sure that the correct versions are being installed (Look in the file `debian/control`, line `Depends:` to see the required versions)

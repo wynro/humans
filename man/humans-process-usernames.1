@@ -28,9 +28,9 @@ or
 humans-process-usernames file.txt
 
 .TP
-If you have the information in a pdf file, you can use \fBpdfgrep(1)\fR to extract it first (althouh you will lose any formatting you have). Assuming your information is in the file.pdf file:
+If you have the information in a pdf file, you can also pass it to \fBhumans-process-usernames\fR, although it will process it as plain text (and output accordingly). Assuming your information is in the file.pdf file:
 
-pdfgrep '.*' file.pdf | humans-process-usernames
+humans-process-usernames file.pdf
 
 .SH FILES
 .TP
