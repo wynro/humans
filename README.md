@@ -102,9 +102,13 @@ Finally, execute it with
 docker run --name humans -it -v /tmp:/result humans
 ```
 
-With this configuration, the database will be left at */tmp*, remember to move it to its correct location.
+With this configuration, the database will be left at */tmp*, remember to move it to its correct location. With a standard installation, the command should be:
 
-You can also change the final location of the database changing the ''/tmp'' part in the docker command (Check permissions)
+```bash
+sudo mv /tmp/humans.db /usr/share/humans/humans.db
+```
+
+You can also change the final location of the database changing the ''/tmp'' part in the docker command (Check permissions).
 
 After that, you can delete the created container and image to save space with
 
