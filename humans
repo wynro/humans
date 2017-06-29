@@ -39,12 +39,6 @@ shift $(($OPTIND - 1))
 COMMAND="$1"
 ARG="$2"
 
-if [ "${COMMAND}" = "" ] || ( [ "${COMMAND}" != "all" ] && [ "${ARG}" = "" ] ); then
-    usage
-    exit 1
-fi
-
-
 case "$COMMAND" in
     "nip")
         TABLE="ALL_INFO"
@@ -111,5 +105,9 @@ case "$COMMAND" in
                 "$DB_LOCATION" \
                 "${ARG}" |
             column -t -n -s "|"
+        ;;
+    *)
+        usage
+        exit 1
         ;;
 esac
