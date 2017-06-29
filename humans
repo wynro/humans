@@ -106,6 +106,10 @@ case "$COMMAND" in
                 "${ARG}" |
             column -t -n -s "|"
         ;;
+    "schema")
+        sqlite3 "$DB_LOCATION" \
+                ".schema"
+        ;;
     *)
         usage
         exit 1

@@ -11,7 +11,7 @@ _humans () {
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts='nip name dni subject bachelor all query'
+    opts='nip name dni subject bachelor all query schema'
     short_opts='nip name dni bachelor all'
     case "${prev}" in
         "humans")
@@ -56,6 +56,10 @@ _humans () {
             return 0
             ;;
         "query")
+            COMPREPLY=()
+            return 0
+            ;;
+        "schema")
             COMPREPLY=()
             return 0
             ;;
