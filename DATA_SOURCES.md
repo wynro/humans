@@ -42,4 +42,4 @@ There is a small detail in this matching (apart from the typical no-accent same-
 
 # End
 
-As simple as that! With some clever searching and a bit of string comparison, the information can be easily obtained. After that, all thats left is the insertion in the database with the prefered schema and off we go.
+As simple as that! With some clever searching and a bit of string comparison, the information can be easily obtained. After that, all thats left is the insertion in the database with the preferred schema and off we go.
