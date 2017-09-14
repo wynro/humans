@@ -29,7 +29,7 @@ In both cases, remember to install/uninstall the required dependencies (Subsecti
 Go to the releases list (https://github.com/wynro/humans/releases), and download the desired package. You can easily install the package with:
 
 ```bash
-sudo dpkg -i humans_.*_all.deb
+sudo dpkg -i humans_*_all.deb
 ```
 
 And remove it with:
