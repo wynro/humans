@@ -26,12 +26,15 @@ if [ "${acceptance}" = "Y" ] || [ "${acceptance}" = "y" ]; then
     mkdir -p /tmp/humans/
     ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o LogLevel=QUIET "a${NIP}@central.cps.unizar.es" "getent group" > /tmp/humans/group
     ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o LogLevel=QUIET "a${NIP}@central.cps.unizar.es" "getent passwd" > /tmp/humans/passwd
-    curl -s http://eina.unizar.es/archivos/2016_2017/Elecciones/ESTJdE/Censo_Definitivo_JdE_Estudiantes_EINA.pdf -o /tmp/census.pdf
-    pdfgrep '.*M[0-9]{1,2}.*' /tmp/census.pdf |
-        grep -v 'CIDONCHA' |
-        grep '^[0-9]\{1,4\} ' |
-        sed -e 's/ \+/ /g' -e 's/^ \+//' -e 's/^[0-9]\{1,4\} //' -e 's/\(^[0-9A-Za-z]\+\) \(.*\),\(.*\) M[0-9]\{1,2\} \(.*\)/\1|\3,\2|\4/' -e 's/,/ /' -e 's/|/,/g' -e 's/ *, */,/g' -e 's/ / /g' > /tmp/humans/student.csv
     rm /tmp/census.pdf
+    curl -s http://www.educacion.es/servicios-al-ciudadano-mecd/dms/mecd/servicios-al-ciudadano-mecd/catalogo/general/educacion/050130/u/050130-u-2015/Zaragoza2015.pdf -o /tmp/humans/census.pdf
+    pdfgrep '[0-9]{8}[a-zA-Z]|[A-Z][0-9]{7}[a-zA-Z]' /tmp/humans/census.pdf |
+        sed -e 's/ \+/ /g' \
+            -e 's/([^)]*)//g' \
+            -e 's/^ \(.*\), \(.*\) \([0-9]\{8\}[a-zA-Z]\|[A-Z][0-9]\{7\}[A-Z]\) \([^0-9]*\) 1.*/"\3","\2 \1","\4"/' \
+            -e 's/(.*"$/"/' \
+            -e 's/ por la.*"$/"/' \
+            -e 's/Graduado o Graduada/Grado/' > /tmp/humans/student.csv
     # TODO: Support more bachelors
     curl -s http://titulaciones.unizar.es/ing-informatica/cuadro_asignaturas.html | iconv -f ISO-8859-15 -t UTF-8 | grep -a "^<tr><[^>]*><[^>]*><[^>]*>" | grep -v '\*\*' | sed "s/<tr><[^>]*><[^>]*><[^>]*>\([0-9]\{1,5\}\)<[^>]*><[^>]*><[^>]*><[^>]*><[^>]*><[^>]*>\([^<]*\)<[^>]*>.*/\1:\2/" > /tmp/humans/subject
     echo "Done."
