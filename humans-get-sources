@@ -3,6 +3,12 @@
 #
 # Extract the source files from their respective places
 
+# Clean all the extra files generated
+cleanup () {
+    rm -f /tmp/humans/census.pdf
+}
+trap cleanup EXIT
+
 echo ""
 echo "=========================NOTICE========================="
 echo ""
@@ -26,7 +32,6 @@ if [ "${acceptance}" = "Y" ] || [ "${acceptance}" = "y" ]; then
     mkdir -p /tmp/humans/
     ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o LogLevel=QUIET "a${NIP}@central.cps.unizar.es" "getent group" > /tmp/humans/group
     ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o LogLevel=QUIET "a${NIP}@central.cps.unizar.es" "getent passwd" > /tmp/humans/passwd
-    rm /tmp/census.pdf
     curl -s http://www.educacion.es/servicios-al-ciudadano-mecd/dms/mecd/servicios-al-ciudadano-mecd/catalogo/general/educacion/050130/u/050130-u-2015/Zaragoza2015.pdf -o /tmp/humans/census.pdf
     pdfgrep '[0-9]{8}[a-zA-Z]|[A-Z][0-9]{7}[a-zA-Z]' /tmp/humans/census.pdf |
         sed -e 's/ \+/ /g' \
