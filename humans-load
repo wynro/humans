@@ -138,7 +138,7 @@ for i in students_dict:
         nip = nip_falso
         nip_falso += 1
     c.execute("INSERT INTO STUDENT (nip,dni,name) VALUES ('{}','{}','{}');"
-              .format(nip, dni, name))
+              .format(nip, dni, name.replace("'", "''")))
     c.execute("INSERT INTO REGISTER (nip,code) VALUES ('{}','{}');"
               .format(nip, bachelor))
 conn.commit()
