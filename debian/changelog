@@ -1,3 +1,10 @@
+humans (0.6) stable; urgency=high
+
+  * Various fixes and cleanups
+  * Add another source pdf (Last was removed)
+
+ -- Guillermo Robles <guillerobles1995@gmail.com>  Thu, 28 Sep 2017 15:49:23 +0200
+
 humans (0.5) stable; urgency=high
 
   * Multiple corrections/bugfixes
